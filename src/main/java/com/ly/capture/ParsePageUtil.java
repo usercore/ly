@@ -143,8 +143,8 @@ public class ParsePageUtil {
 	}
 	
 	//解析详情页
-	public static Map<String,Object> getEnPageInfo(Document doc) {
-		Map<String,Object> result = new HashMap<>();
+	public static Map<String,String> getEnPageInfo(Document doc) {
+		Map<String,String> result = new HashMap<>();
 		String keyId = "a-unordered-list a-nostyle a-vertical";
 		if (null == doc) {
 			return null;
