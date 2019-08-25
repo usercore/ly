@@ -8,12 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jsoup.nodes.Document;
-import org.springframework.util.ObjectUtils;
-
 import com.ly.excel.ExcelUtils;
 import com.ly.util.HttpUtil;
 import com.ly.util.PropertieUtil;
@@ -31,12 +28,6 @@ public class CaptureEnInfo {
 	
 	static Map<String, String> cookieMap = new HashMap<>();
 
-	public static Map<String, String> getCookieMap(){
-		if(ObjectUtils.isEmpty(cookieMap)){
-			cookieMap = HttpUtil.getCookie(cookieUrl, cookieMap);
-		}
-		return cookieMap;
-	}
 	/**
 	 * 解析当页所有url，获取下一页url，遍历url读取页面内容
 	 * 
@@ -50,7 +41,7 @@ public class CaptureEnInfo {
 		
 		try {
 			Document pageDom = HttpUtil.getPageInfo(parentPageVO.getCurrentUrl(),
-					getCookieMap());
+					HttpUtil.getCookieMap(cookieUrl, cookieMap));
 			
 			if(null == pageDom || ParsePageUtil.judgeRobot(pageDom)){
 				ThreadUtil.sleepTime(300000L);
@@ -76,6 +67,7 @@ public class CaptureEnInfo {
 		String excelFilePath = PropertieUtil.getValue("excelFilePath");
 		List<PageMainInfoVO> result = new ArrayList<>();
 		
+
 		for(String url:urlList){
 			if(url.length()<60){
 				continue;
@@ -88,26 +80,31 @@ public class CaptureEnInfo {
 			
 			System.out.println("url=" + url);
 			
-			Document doc = HttpUtil.getPageInfo(url, getCookieMap());
+			Document doc = HttpUtil.getPageInfo(url, HttpUtil.getCookieMap(cookieUrl, cookieMap));
 
 			if(doc == null || ParsePageUtil.judgeRobot(doc)){
 				ThreadUtil.sleepTime(300000L);
 				clearCookie();
-				getCookieMap();
+				HttpUtil.getCookieMap(cookieUrl, cookieMap);
 				getSecPage(urlList,rowIndex,parentPageVO);
 			}
 			String secUrl = ParsePageUtil.getSecEnPageUrl(doc);
 			
-			Document secDoc = HttpUtil.getPageInfo(secUrl, getCookieMap());
+			Document secDoc = HttpUtil.getPageInfo(secUrl, HttpUtil.getCookieMap(cookieUrl, cookieMap));
 			
-			Map<String,Object> pageInfo = ParsePageUtil.getEnPageInfo(secDoc);
+			Map<String,String> pageInfo = ParsePageUtil.getEnPageInfo(secDoc);
 			
 			System.out.println("第二页url=" + secUrl);
 			if(null != pageInfo){
 				pageInfo.put("thrUrl", secUrl);
 				pageInfo.put("secUrl", url);
-				pageInfo.put("nextUrl", parentPageVO.getNextPage().getCurrentUrl());
-				List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+				if(parentPageVO.getNextPage() != null && parentPageVO.getNextPage().getCurrentUrl() != null){
+					pageInfo.put("nextUrl", parentPageVO.getNextPage().getCurrentUrl());
+				}else{
+					pageInfo.put("nextUrl", "");
+				}
+				
+				List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 				list.add(pageInfo);
 				//写excel
 				try {

@@ -33,7 +33,7 @@ public class CaptureStart {
 		List<PageMainInfoVO> result = new ArrayList<>();
 
 		for (String url : urlList) {
-			Document doc = HttpUtil.getPageInfo(url, HttpUtil.getCookie(cookieUrl, cookieMap));
+			Document doc = HttpUtil.getPageInfo(url, HttpUtil.getCookieMap(cookieUrl, cookieMap));
 			if(doc == null || ParsePageUtil.judgeRobot(doc)){
 				ThreadUtil.sleepTime(300000L);
 				result.clear();
@@ -67,7 +67,7 @@ public class CaptureStart {
 		
 		try {
 			Document pageDom = HttpUtil.getPageInfo(parentPageVO.getCurrentUrl(),
-					HttpUtil.getCookie(cookieUrl, cookieMap));
+					HttpUtil.getCookieMap(cookieUrl, cookieMap));
 			
 			if(null == pageDom || ParsePageUtil.judgeRobot(pageDom)){
 				ThreadUtil.sleepTime(300000L);
@@ -99,15 +99,15 @@ public class CaptureStart {
 	 */
 	public static void writeExcel(List<PageMainInfoVO> pageMainInfolist, int rowIndex, ParentPageVO parentPageVO) {
 		String excelFilePath = PropertieUtil.getValue("excelFilePath");
-		List<Map<String, Object>> list = new ArrayList<>();
+		List<Map<String, String>> list = new ArrayList<>();
 		pageMainInfolist.forEach(pageMainInfo -> {
-			Map<String, Object> map = new HashMap<>();
+			Map<String, String> map = new HashMap<>();
 			map.put("by", pageMainInfo.getByInfo());
 			map.put("productFirstWord", pageMainInfo.getFirstWord());
 			map.put("star", pageMainInfo.getStar());
 			map.put("customer", pageMainInfo.getCustomerViews());
 			map.put("url", pageMainInfo.getUrl());
-			map.put("currentPage", parentPageVO.getCurrentPage());
+			map.put("currentPage", parentPageVO.getCurrentPage() + "");
 			map.put("currnetPageUrl", parentPageVO.getCurrentUrl());
 			if (null == parentPageVO.getNextPage().getCurrentUrl()) {
 				map.put("nextPageUrl", "");

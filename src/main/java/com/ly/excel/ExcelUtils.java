@@ -212,7 +212,7 @@ public class ExcelUtils {
 	 * @throws EncryptedDocumentException
 	 */
 	public static boolean writeExcel(String filepath, String sheetName, List<String> titles,
-			List<Map<String, Object>> values, int rowIndex)
+			List<Map<String, String>> values, int rowIndex)
 			throws IOException, EncryptedDocumentException, InvalidFormatException,IllegalArgumentException {
 		boolean success = false;
 		OutputStream outputStream = null;
@@ -281,12 +281,12 @@ public class ExcelUtils {
 			}
 
 			// 写入正文
-			Iterator<Map<String, Object>> iterator = values.iterator();
+			Iterator<Map<String, String>> iterator = values.iterator();
 			// 行号
 			while (iterator.hasNext()) {
 				row = sheet.createRow(rowIndex);
-				Map<String, Object> value = iterator.next();
-				for (Map.Entry<String, Object> map : value.entrySet()) {
+				Map<String, String> value = iterator.next();
+				for (Map.Entry<String, String> map : value.entrySet()) {
 					// 获取列名
 					String title = map.getKey();
 					// 根据列名获取序号
