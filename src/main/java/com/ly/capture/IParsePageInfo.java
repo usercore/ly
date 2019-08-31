@@ -16,7 +16,7 @@ public interface IParsePageInfo {
 	 * @param url
 	 * @return
 	 */
-	public Set<String> getPageAllUrl(Document doc)throws Exception;
+	Set<String> getPageAllUrl(Document doc)throws Exception;
 	/**
 	 * 获取下一页链接地址
 	 * @param doc
