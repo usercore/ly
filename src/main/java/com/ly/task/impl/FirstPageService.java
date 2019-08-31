@@ -51,6 +51,7 @@ public class FirstPageService implements ITaskService{
 		} catch (Exception e) {
 			redisUtil.rPush(redisKey, dealUrl);
 			e.printStackTrace();
+			return;
 		}
 		
 		if(CollectionUtils.isEmpty(urls)){
@@ -63,7 +64,9 @@ public class FirstPageService implements ITaskService{
 		List<String> urlList = new ArrayList<>();
 		
 		for(String url:urls){
-			urlList.add(url + GloableConstant.SPLIT_COMMA + dealUrl);
+			if(url.indexOf("qid") != -1){
+				urlList.add(url + GloableConstant.SPLIT_COMMA + dealUrl);
+			}
 		}
 		
 		redisUtil.lSetList("secPageList", urlList);

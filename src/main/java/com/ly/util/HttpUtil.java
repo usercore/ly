@@ -52,7 +52,6 @@ public class HttpUtil {
 				return doc;
 			}
 			doc = Jsoup.connect(url).timeout(90000).userAgent(getUserAgent()).cookies(cookieMap).get();
-//			doc = Jsoup.parse(new URL(url), 90000);
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("error");

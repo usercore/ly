@@ -1,17 +1,11 @@
 package com.ly.capture.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.util.HSSFColor.GOLD;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,12 +13,9 @@ import org.springframework.stereotype.Service;
 
 import com.ly.capture.IParsePageInfo;
 import com.ly.capture.ParsePageUtil;
-import com.ly.excel.ExcelUtils;
+import com.ly.exception.BusinessException;
 import com.ly.util.GloableConstant;
-import com.ly.util.HttpUtil;
-import com.ly.util.PropertieUtil;
 import com.ly.util.ThreadUtil;
-import com.ly.vo.PageMainInfoVO;
 
 /**
  * 亚马逊英国站
@@ -35,9 +26,11 @@ import com.ly.vo.PageMainInfoVO;
 @Service("parseAmazonUkPage")
 public class ParseAmazonUkPageImpl implements IParsePageInfo {
 
-	String hrefClass = "s-result-list s-search-results sg-row";
+	private String hrefClass = "s-result-list s-search-results sg-row";
 
-	String nextPageClass = "a-normal";
+	private String nextPageClass = "a-normal";
+	
+	private String productsId = "products-link";
 
 	static Map<String, String> cookieMap = new HashMap<>();
 
@@ -69,11 +62,12 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 	}
 
 	@Override
-	public String getNextUrl(Document doc, int currentPage, String currentUrl) {
+	public String getNextUrl(Document doc, int currentPage) {
 		String nextPaeUrl = "";
 		if (doc == null) {
 			return null;
 		}
+		
 		Elements pages = doc.getElementsByClass(nextPageClass);
 
 		for (Iterator<Element> it = pages.iterator(); it.hasNext();) {
@@ -85,31 +79,31 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 				break;
 			}
 		}
-		if (null == nextPaeUrl || nextPaeUrl.equals("")) {
-			nextPaeUrl = currentUrl.replace(currentPage + "", (currentPage + 1) + "");
-		}
 		return nextPaeUrl;
 	}
 
 	@Override
-	public Map<String, String> parsePageInfo(Document doc) {
+	public Map<String, String> parsePageInfo(Document doc) throws BusinessException{
 
 		if (doc == null || ParsePageUtil.judgeRobot(doc)) {
 			ThreadUtil.sleepTime(300000L);
-			return null;
+			throw new BusinessException("网络异常");
 		}
-		String secUrl = getSecEnPageUrl(doc);
 
-		Document secDoc = HttpUtil.getPageInfo(secUrl, HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
-
-		Map<String, String> pageInfo = getEnPageInfo(secDoc);
+		Map<String, String> pageInfo = getEnPageInfo(doc);
 
 		return pageInfo;
 	}
 
 	// 解析英国数据
-	private static String getSecEnPageUrl(Document doc) {
+	@Override
+	public String getThrEnPageUrl(Document doc) {
 		String keyId = "merchant-info";
+		return getUrlById(doc, keyId);
+
+	}
+	
+	private String getUrlById(Document doc,String keyId){
 		String url = "";
 
 		if (null == doc) {
@@ -127,11 +121,10 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			url = GloableConstant.AMAZON_HOME_UK + a.get(0).attr("href");
 		}
 		return url;
-
 	}
 
 	// 解析详情页
-	private static Map<String, String> getEnPageInfo(Document doc) {
+	private Map<String, String> getEnPageInfo(Document doc) {
 		Map<String, String> result = new HashMap<>();
 		String keyId = "a-unordered-list a-nostyle a-vertical";
 		if (null == doc) {
@@ -152,6 +145,8 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			}
 
 		}
+		result.put("productsUrl", getUrlById(doc, productsId));
+		
 		System.out.println("详情页=" + result);
 		return result;
 

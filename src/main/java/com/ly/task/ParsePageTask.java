@@ -21,7 +21,7 @@ public class ParsePageTask  {
 	@Autowired
 	private RedisTemplate redisTemplate;
 	
-	private String[] tasks = {"initTask","firstPageList","secPageList"};
+	private String[] tasks = {"initTask","firstPageList","secPageList","thrPageList"};
 	
 	@Autowired
 	IParsePageInfo parseAmazonUkPage;

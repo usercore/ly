@@ -35,7 +35,8 @@ Class-Path: ./ lib/spring-boot-starter-web-1.5.13.RELEASE.jar lib/spri
  jar lib/httpcore-4.4.3.jar lib/dom4j-1.6.1.jar lib/xml-apis-1.0.b2.ja
  r lib/json-lib-2.1-jdk15.jar lib/commons-beanutils-1.7.0.jar lib/comm
  ons-collections-3.2.jar lib/commons-lang-2.3.jar lib/ezmorph-1.0.3.ja
- r lib/guava-20.0.jar lib/jsoup-1.11.3.jar
+ r lib/guava-20.0.jar lib/jsoup-1.12.1.jar lib/scala-library-2.11.0.ja
+ r
 Build-Jdk: 1.8.0_121
 Created-By: Maven Integration for Eclipse
 Main-Class: com.ly.boot.Main

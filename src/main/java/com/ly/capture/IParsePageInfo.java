@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.jsoup.nodes.Document;
 
+import com.ly.exception.BusinessException;
+
 public interface IParsePageInfo {
 
 	public static final String AMAZON_HOME = "https://www.amazon";
@@ -20,12 +22,18 @@ public interface IParsePageInfo {
 	 * @param doc
 	 * @return
 	 */
-	public String getNextUrl(Document doc,int currentPage,String currentUrl);
+	public String getNextUrl(Document doc,int currentPage);
 	
 	/**
 	 * 解析页面信息
 	 * @return
 	 */
-	public Map<String,String> parsePageInfo(Document doc) throws Exception;
+	public Map<String,String> parsePageInfo(Document doc) throws BusinessException;
+	/**
+	 * 接卸第三页
+	 * @param doc
+	 * @return
+	 */
+	public String getThrEnPageUrl(Document doc) ;
 	
 }

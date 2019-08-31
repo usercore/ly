@@ -1,27 +1,19 @@
 package com.ly.task.impl;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
-
 import com.ly.capture.IParsePageInfo;
-import com.ly.excel.ExcelUtils;
 import com.ly.task.ITaskService;
 import com.ly.util.GloableConstant;
 import com.ly.util.HttpUtil;
-import com.ly.util.PropertieUtil;
 import com.ly.util.RedisUtil;
+
 
 @Service("secPageList")
 public class SecPageService implements ITaskService {
@@ -33,13 +25,15 @@ public class SecPageService implements ITaskService {
 	
 	static List<String> title = Arrays.asList("detailUrl","listUrl","Trade Register Number","VAT Number","Customer Services Address","Business Address","Phone number","Business Type","Business Name");
 	
+	String finalUkPage = "finalUkPage";
 	@Autowired
 	IParsePageInfo parseAmazonUkPage;
 	
 	@Override
 	public void runTask(String redisKey) {
-
 		String dealInfo = redisUtil.lPop(redisKey);
+		try {
+		
 		
 		System.out.println(redisKey + "  dealUrl = " + dealInfo);
 
@@ -56,44 +50,34 @@ public class SecPageService implements ITaskService {
 		}
 		
 		String detailUrl = dealUrls[0];
-		
-		String listUrl = dealUrls[1];
-		
-		String excelFilePath = PropertieUtil.getValue("excelFilePath");
+		//临时代码
+		if(detailUrl.indexOf("qid") == -1){
+			return;
+		}
 		
 		Document pageDom = HttpUtil.getPageInfo(detailUrl,
 				HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
 		
-		Map<String, String> result = new HashMap<>();
 		
-		try {
-			result = parseAmazonUkPage.parsePageInfo(pageDom);
-			result.put("detailUrl", detailUrl);
-			result.put("listUrl", listUrl);
+		String url = parseAmazonUkPage.getThrEnPageUrl(pageDom);
+		//如果存在返回
+		if(redisUtil.sHasKey(finalUkPage, url)){
+			return ;
+		}
+		
+		
+		
+		if(!StringUtils.isEmpty(url)){
+			redisUtil.sSet(finalUkPage, url);
+			redisUtil.lSet("thrPageList", url + GloableConstant.SPLIT_COMMA + dealInfo);
+		}
+		
 		} catch (Exception e) {
+			System.out.println("发生异常，放回队列");
 			redisUtil.lSet(redisKey, dealInfo);
 			e.printStackTrace();
 			return;
 		}
-		
-		if(ObjectUtils.isEmpty(result)){
-			redisUtil.lSet(redisKey, dealInfo);
-			return;
-		}
-		
-		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
-		list.add(result);
-		
-		
-		//写excel
-		try {
-			ExcelUtils.writeExcel(excelFilePath, "页面内容", title, list, 1);
-		} catch (EncryptedDocumentException | InvalidFormatException | IllegalArgumentException | IOException e1) {
-			redisUtil.lSet(redisKey, dealInfo);
-			e1.printStackTrace();
-			return;
-		}
-		
 		
 	}
 
