@@ -13,7 +13,7 @@ public interface IParsePageInfo {
 	
 	/**
 	 * 获取网页下的所有链接
-	 * @param url
+	 * @param doc
 	 * @return
 	 */
 	Set<String> getPageAllUrl(Document doc)throws Exception;

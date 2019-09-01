@@ -6,9 +6,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 
-	private static ClassPathXmlApplicationContext context;
-
 	public static void main(String[] args) throws IOException {
+
+		ClassPathXmlApplicationContext context;
 			
 		context = new ClassPathXmlApplicationContext(new String[] { "applicationContext-redis.xml" });
 		context.start();

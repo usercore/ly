@@ -54,13 +54,8 @@ public class InitTaskService implements ITaskService {
 		System.out.println("initTask =" + url);
 
 		try {
-			String nextUrl = savePageUrl(url,nextPage, totalPage);
+			savePageUrl(url,nextPage, totalPage);
 
-			if (StringUtils.isEmpty(nextUrl)) {
-				System.out.println("找不到第二页！！！！！");
-				redisUtil.rPush(redisKey, dealInfo);
-				return;
-			}
 		} catch (Exception e) {
 			redisUtil.rPush(redisKey, dealInfo);
 			e.printStackTrace();
@@ -68,15 +63,22 @@ public class InitTaskService implements ITaskService {
 		}
 	}
 
-	private String savePageUrl(String dealUrl,String nextUrl, int totalPage) throws Exception {
+	private boolean savePageUrl(String dealUrl,String nextUrl, int totalPage) throws Exception {
+		boolean result = false;
 
 		if(StringUtils.isEmpty(nextUrl)){
-			Document pageDom = HttpUtil.getPageInfo(dealUrl,
-					HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
-			nextUrl = parseAmazonUkPage.getNextUrl(pageDom, 1);
-		}
+			redisUtil.lSet("firstPageList", dealUrl);
 
-		if (!StringUtils.isEmpty(nextUrl)) {
+			for (int i = 1; i < totalPage; i++) {
+				String tempUrl = dealUrl;
+				tempUrl = tempUrl.replace(GloableConstant.ONE + "", (i + GloableConstant.ONE) + "");
+
+				redisUtil.lSet("firstPageList", tempUrl);
+			}
+			
+			result = true;
+
+		}else if (!StringUtils.isEmpty(nextUrl)) {
 			
 			redisUtil.lSet("firstPageList", dealUrl);
 			
@@ -90,9 +92,11 @@ public class InitTaskService implements ITaskService {
 
 				redisUtil.lSet("firstPageList", nextUrl);
 			}
+			
+			result = true;
 		}
 
-		return nextUrl;
+		return result;
 	}
 	
 }
