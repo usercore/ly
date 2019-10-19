@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc8b60a6-9213-4183-bd88-0a33850f818a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/capture/IParsePageInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/capture/IParsePageInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/capture/impl/ParseAmazonUkPageImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/capture/impl/ParseAmazonUkPageImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/PageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/PageUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/brand/SecBrandPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/brand/SecBrandPageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/ThrPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/ThrPageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/util/GloableConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/util/GloableConstant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/util/UrlUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/util/UrlUtil.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -77,8 +69,8 @@
       <file leaf-file-name="ParseAmazonUkPageImpl.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/capture/impl/ParseAmazonUkPageImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="125" column="14" selection-start-line="125" selection-start-column="14" selection-end-line="125" selection-end-column="14" />
+            <state relative-caret-position="391">
+              <caret line="123" selection-start-line="123" selection-end-line="123" />
             </state>
           </provider>
         </entry>
@@ -503,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571475559570</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="提交">
+      <created>1571478828012</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1571478828012</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -919,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/capture/impl/ParseAmazonUkPageImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="125" column="14" selection-start-line="125" selection-start-column="14" selection-end-line="125" selection-end-column="14" />
+        <state relative-caret-position="391">
+          <caret line="123" selection-start-line="123" selection-end-line="123" />
         </state>
       </provider>
     </entry>

@@ -121,7 +121,6 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 
 		return result;
 	}
-
 	/**
 	 * 获取title
 	 * @param pageDom
