@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.ly.capture.ParsePageUtil;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -49,6 +50,10 @@ public class HttpUtil {
 				return doc;
 			}
 			doc = Jsoup.connect(url).timeout(90000).userAgent(getUserAgent()).cookies(cookieMap).get();
+			if(doc == null || ParsePageUtil.judgeRobot(doc)){
+				ThreadUtil.sleepTime(300000L);
+				return null;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("error");
