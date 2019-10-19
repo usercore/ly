@@ -21,7 +21,7 @@ public class ParsePageTask  {
 	@Autowired
 	private RedisTemplate redisTemplate;
 	
-	private String[] tasks = {"initTask","firstPageList","secPageList","thrPageList","companyPageInfo"};
+	private String[] tasks = {"initTask","firstPageList","secPageList","thrPageList","initBrandTask","firstBrandPageList","secBrandPageList"};
 //	private String[] tasks = {"initTask"};
 
 
