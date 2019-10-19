@@ -127,6 +127,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 	private Map<String, String> getEnPageInfo(Document doc) {
 		Map<String, String> result = new HashMap<>();
 		String keyId = "a-unordered-list a-nostyle a-vertical";
+
 		if (null == doc) {
 			return null;
 		}
@@ -145,10 +146,9 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			}
 
 		}
-		result.put("productsUrl", getUrlById(doc, productsId));
+		result.put(GloableConstant.PRODUCT_URL, getUrlById(doc, productsId));
 		
 		System.out.println("详情页=" + result);
 		return result;
-
 	}
 }
