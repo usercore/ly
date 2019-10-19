@@ -16,24 +16,31 @@ public interface IParsePageInfo {
 	 * @param doc
 	 * @return
 	 */
-	Set<String> getPageAllUrl(Document doc)throws Exception;
+	Set<String> getPageAllUrl(Document doc,String url)throws Exception;
 	/**
 	 * 获取下一页链接地址
 	 * @param doc
 	 * @return
 	 */
-	public String getNextUrl(Document doc,int currentPage);
+	public String getNextUrl(Document doc,int currentPage,String url);
 	
 	/**
 	 * 解析页面信息
 	 * @return
 	 */
-	public Map<String,String> parsePageInfo(Document doc) throws BusinessException;
+	public Map<String,String> parsePageInfo(Document doc,String url) throws BusinessException;
 	/**
-	 * 接卸第三页
+	 * 解析第三页
 	 * @param doc
 	 * @return
 	 */
-	public String getThrEnPageUrl(Document doc) ;
+	public String getThrEnPageUrl(Document doc,String url) ;
+
+	/**
+	 * 获取品牌信息
+	 * @param url
+	 * @return
+	 */
+	public Map<String,String> getBrandInfo(String url);
 	
 }

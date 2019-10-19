@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.alibaba.druid.support.json.JSONUtils;
+import com.ly.util.*;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jsoup.nodes.Document;
@@ -17,11 +18,6 @@ import org.springframework.util.StringUtils;
 import com.ly.capture.IParsePageInfo;
 import com.ly.excel.ExcelUtils;
 import com.ly.task.ITaskService;
-import com.ly.util.DateUtil;
-import com.ly.util.GloableConstant;
-import com.ly.util.HttpUtil;
-import com.ly.util.PropertieUtil;
-import com.ly.util.RedisUtil;
 
 @Service("thrPageList")
 public class ThrPageService implements ITaskService {
@@ -65,11 +61,11 @@ public class ThrPageService implements ITaskService {
 		+ PropertieUtil.getValue("excelFilePostfix");
 		
 		Document pageDom = HttpUtil.getPageInfo(url,
-				HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
+				HttpUtil.getCookieMap(UrlUtil.parseHostUrl(url), cookieMap));
 		
 		Map<String, String> result = new HashMap<>();
 
-			result = parseAmazonUkPage.parsePageInfo(pageDom);
+			result = parseAmazonUkPage.parsePageInfo(pageDom,url);
 			
 			if(result != null){
 				result.put("detailUrl", detailUrl);

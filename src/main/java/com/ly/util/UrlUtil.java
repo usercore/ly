@@ -37,13 +37,18 @@ public class UrlUtil {
         return url;
     }
 
+    public static String parseHostUrl(String url){
+        String result = url.substring(0,url.indexOf("/",10));
+        return result;
+    }
     public static void main(String[] args){
         Map<String,String> map = new HashMap();
-        map = getQuestParam(" https://www.amazon.co.uk/s?k=Headphones&i=electronics&rh=n%3A4085731&lo=list&page=1&qid=1567329316&ref=sr_pg_1");
+        String url1 = "https://www.amazon.co.uk/s?k=Headphones&i=electronics&rh=n%3A4085731&lo=list&page=1&qid=1567329316&ref=sr_pg_1";
+        map = getQuestParam("https://www.amazon.co.uk/s?k=Headphones&i=electronics&rh=n%3A4085731&lo=list&page=1&qid=1567329316&ref=sr_pg_1");
         String host = map.get("host");
         map.remove("host");
 
-        String url = assembleUrl(host,map);
+        String url = parseHostUrl(url1);
 
         System.out.println(url);
 

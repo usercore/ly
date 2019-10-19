@@ -5,6 +5,7 @@ import com.ly.task.ITaskService;
 import com.ly.util.GloableConstant;
 import com.ly.util.HttpUtil;
 import com.ly.util.RedisUtil;
+import com.ly.util.UrlUtil;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,8 @@ public class SecBrandPageService implements ITaskService {
                 return;
             }
             Document pageDom = HttpUtil.getPageInfo(detailUrl,
-                    HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
-            String url = parseAmazonUkPage.getThrEnPageUrl(pageDom);
+                    HttpUtil.getCookieMap(UrlUtil.parseHostUrl(detailUrl), cookieMap));
+            String url = parseAmazonUkPage.getThrEnPageUrl(pageDom,detailUrl);
             //如果存在返回
             if (redisUtil.sHasKey(finalBrandPage, url)) {
                 return;

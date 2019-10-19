@@ -84,10 +84,10 @@ public class PageUtil {
      */
     public void parseSecPage(String dealUrl,String redisKey,String saveRedis){
         Document pageDom = HttpUtil.getPageInfo(dealUrl,
-                HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
+                HttpUtil.getCookieMap(UrlUtil.parseHostUrl(dealUrl), cookieMap));
         Set<String> urls = new HashSet<>();
         try {
-            urls = parseAmazonUkPage.getPageAllUrl(pageDom);
+            urls = parseAmazonUkPage.getPageAllUrl(pageDom,dealUrl);
         } catch (Exception e) {
             redisUtil.rPush(redisKey, dealUrl);
             e.printStackTrace();

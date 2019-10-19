@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.ly.util.HttpUtil;
+import com.ly.util.UrlUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -35,9 +37,9 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 	static Map<String, String> cookieMap = new HashMap<>();
 
 	@Override
-	public Set<String> getPageAllUrl(Document doc) throws Exception {
+	public Set<String> getPageAllUrl(Document doc,String url) throws Exception {
 
-		Set<String> result = new HashSet<String>();
+		Set<String> result = new HashSet<>();
 		Element body = doc.body();
 		Elements cla = body.getElementsByClass(hrefClass);
 
@@ -50,7 +52,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			String href = e.attr(GloableConstant.HREF);
 
 			if (href.indexOf(GloableConstant.HTTP) == -1 && href.indexOf(AMAZON_HOME) == -1) {
-				href = GloableConstant.AMAZON_HOME_UK + href;
+				href = UrlUtil.parseHostUrl(url) + href;
 			}
 
 			if (href.indexOf(GloableConstant.JAVASCRIPT) != -1) {
@@ -62,7 +64,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 	}
 
 	@Override
-	public String getNextUrl(Document doc, int currentPage) {
+	public String getNextUrl(Document doc, int currentPage,String url) {
 		String nextPaeUrl = "";
 		if (doc == null) {
 			return null;
@@ -75,7 +77,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			Elements a = e.select(GloableConstant.A);
 			if (a.text().equals((currentPage + GloableConstant.ONE) + "")) {
 				String href = a.attr(GloableConstant.HREF);
-				nextPaeUrl = GloableConstant.AMAZON_HOME_UK + href;
+				nextPaeUrl = UrlUtil.parseHostUrl(url) + href;
 				break;
 			}
 		}
@@ -83,7 +85,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 	}
 
 	@Override
-	public Map<String, String> parsePageInfo(Document doc) throws BusinessException{
+	public Map<String, String> parsePageInfo(Document doc,String url) throws BusinessException{
 
 		if (doc == null || ParsePageUtil.judgeRobot(doc)) {
 			ThreadUtil.sleepTime(300000L);
@@ -97,12 +99,51 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 
 	// 解析英国数据
 	@Override
-	public String getThrEnPageUrl(Document doc) {
+	public String getThrEnPageUrl(Document doc,String url) {
 		String keyId = "merchant-info";
 		return getUrlById(doc, keyId);
 
 	}
-	
+
+	/**
+	 * 获取品牌信息
+	 * @param url
+	 * @return
+	 */
+	public Map<String,String> getBrandInfo(String url){
+		Map<String,String> result = new HashMap<>();
+		Document pageDom = HttpUtil.getPageInfo(url,
+				HttpUtil.getCookieMap(UrlUtil.parseHostUrl(url), cookieMap));
+		//详情页地址
+		result.put("detailUrl",url);
+		//获取title
+		result.put("title",getTitle(pageDom));
+
+		return result;
+	}
+
+	/**
+	 * 获取title
+	 * @param pageDom
+	 * @return
+	 */
+	private String getTitle(Document pageDom){
+		String title = "";
+		String titleId = "productTitle";
+		title = getStrById(pageDom,titleId);
+		return title;
+	}
+	private String getStrById(Document doc,String keyId){
+		String result = "";
+		if (null == doc) {
+			return result;
+		}
+		Element e = doc.getElementById(keyId);
+		if (null == e) {
+			return result;
+		}
+		return e.text();
+	}
 	private String getUrlById(Document doc,String keyId){
 		String url = "";
 
@@ -118,7 +159,7 @@ public class ParseAmazonUkPageImpl implements IParsePageInfo {
 			return url;
 		}
 		if (a.size() > 0) {
-			url = GloableConstant.AMAZON_HOME_UK + a.get(0).attr("href");
+			url = UrlUtil.parseHostUrl(url) + a.get(0).attr("href");
 		}
 		return url;
 	}
