@@ -44,7 +44,7 @@ public class FirstPageService implements ITaskService{
 		Document pageDom = HttpUtil.getPageInfo(dealUrl,
 				HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
 		
-		Set<String> urls = new HashSet<String>();
+		Set<String> urls = new HashSet<>();
 		
 		try {
 			urls = parseAmazonUkPage.getPageAllUrl(pageDom);
