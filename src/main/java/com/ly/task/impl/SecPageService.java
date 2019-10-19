@@ -1,4 +1,4 @@
-package com.ly.task.impl.company;
+package com.ly.task.impl;
 
 import java.util.Arrays;
 import java.util.HashMap;

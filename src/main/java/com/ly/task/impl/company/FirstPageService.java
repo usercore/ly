@@ -40,12 +40,10 @@ public class FirstPageService implements ITaskService{
 		if(StringUtils.isEmpty(dealUrl)){
 			return ;
 		}
-		
 		Document pageDom = HttpUtil.getPageInfo(dealUrl,
 				HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
 		
 		Set<String> urls = new HashSet<>();
-		
 		try {
 			urls = parseAmazonUkPage.getPageAllUrl(pageDom);
 		} catch (Exception e) {
@@ -53,14 +51,11 @@ public class FirstPageService implements ITaskService{
 			e.printStackTrace();
 			return;
 		}
-		
 		if(CollectionUtils.isEmpty(urls)){
 			redisUtil.rPush(redisKey, dealUrl);
 			return ;
 		}
-		
-		
-		
+
 		List<String> urlList = new ArrayList<>();
 		
 		for(String url:urls){
