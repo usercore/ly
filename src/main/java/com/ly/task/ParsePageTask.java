@@ -22,7 +22,10 @@ public class ParsePageTask  {
 	private RedisTemplate redisTemplate;
 	
 	private String[] tasks = {"initTask","firstPageList","secPageList","thrPageList"};
-	
+//	private String[] tasks = {"initTask"};
+
+
+
 	@Autowired
 	IParsePageInfo parseAmazonUkPage;
 	

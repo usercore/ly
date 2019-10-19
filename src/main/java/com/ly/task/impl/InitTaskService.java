@@ -2,6 +2,8 @@ package com.ly.task.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.ly.util.UrlUtil;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,9 +72,11 @@ public class InitTaskService implements ITaskService {
 			redisUtil.lSet("firstPageList", dealUrl);
 
 			for (int i = 1; i < totalPage; i++) {
-				String tempUrl = dealUrl;
-				tempUrl = tempUrl.replace(GloableConstant.ONE + "", (i + GloableConstant.ONE) + "");
 
+				Map<String,String> map = UrlUtil.getQuestParam(dealUrl);
+				map.put("page" ,(i + 1) + "");
+				map.put("ref","sr_pg_" + (i + 1));
+				String tempUrl = UrlUtil.assembleUrl(map.get("host"),map);
 				redisUtil.lSet("firstPageList", tempUrl);
 			}
 			
