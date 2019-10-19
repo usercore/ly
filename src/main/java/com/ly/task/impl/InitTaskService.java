@@ -2,7 +2,6 @@ package com.ly.task.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.ly.util.UrlUtil;
 import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class InitTaskService implements ITaskService {
 
 	@Autowired
 	private RedisUtil redisUtil;
-
+	PageUtil pageUtil;
 	static Map<String, String> cookieMap = new HashMap<>();
 
 	@Autowired
