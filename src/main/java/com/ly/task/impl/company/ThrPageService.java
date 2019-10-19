@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.alibaba.druid.support.json.JSONUtils;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -15,7 +14,6 @@ import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 import com.ly.capture.IParsePageInfo;
 import com.ly.excel.ExcelUtils;
 import com.ly.task.ITaskService;
@@ -70,8 +68,7 @@ public class ThrPageService implements ITaskService {
 				HttpUtil.getCookieMap(GloableConstant.UK_COOKIE_URL, cookieMap));
 		
 		Map<String, String> result = new HashMap<>();
-		
-		
+
 			result = parseAmazonUkPage.parsePageInfo(pageDom);
 			
 			if(result != null){

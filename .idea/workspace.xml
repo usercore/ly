@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fc8b60a6-9213-4183-bd88-0a33850f818a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/InitTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/InitTaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/SecPageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/SecPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ly/task/impl/FirstPageService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,10 +30,10 @@
         </entry>
       </file>
       <file leaf-file-name="FirstPageService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/FirstPageService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="33" column="39" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="39" />
+            <state relative-caret-position="125">
+              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -79,16 +78,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/util/RedisUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="402" column="18" selection-start-line="402" selection-start-column="18" selection-end-line="402" selection-end-column="18" />
+              <caret line="329" column="16" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="SecPageService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/SecPageService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="252">
+              <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -96,7 +95,7 @@
       <file leaf-file-name="ThrPageService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/ThrPageService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-250">
+            <state relative-caret-position="50">
               <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
             </state>
           </provider>
@@ -135,6 +134,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/ly/task/impl/BrandPageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/ly/task/impl/InitTaskService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java" />
       </list>
     </option>
   </component>
@@ -237,6 +237,17 @@
               <item name="ly" type="462c0819:PsiDirectoryNode" />
               <item name="task" type="462c0819:PsiDirectoryNode" />
               <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="capture" type="b2602c69:ProjectViewProjectNode" />
+              <item name="capture" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ly" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="company" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="capture" type="b2602c69:ProjectViewProjectNode" />
@@ -407,11 +418,19 @@
       <option name="project" value="LOCAL" />
       <updated>1571460012148</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="提交">
+      <created>1571460391774</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571460391774</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -746,13 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/util/RedisUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="402" column="18" selection-start-line="402" selection-start-column="18" selection-end-line="402" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/capture/impl/ParseAmazonUkPageImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="377">
@@ -781,13 +793,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/ThrPageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-250">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/brand/BrandPageService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -798,13 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/FirstPageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="33" column="39" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/InitTaskService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -812,10 +810,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/SecPageService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/FirstPageService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="125">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/ThrPageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/util/RedisUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="329" column="16" selection-start-line="329" selection-start-column="16" selection-end-line="329" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/ly/task/impl/company/SecPageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
         </state>
       </provider>
     </entry>
