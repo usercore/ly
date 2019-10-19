@@ -12,9 +12,6 @@ import org.springframework.util.ObjectUtils;
 
 public class HttpUtil {
 
-	//static String user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36";
-	static String user_agent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1";
-	
 	static String[] user_agents = {"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1",
 			"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36",
 			"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0",
@@ -65,12 +62,12 @@ public class HttpUtil {
 	}
 	
 	public static Map<String, String> getCookie(String url) {
-		Map<String, String> cookieMap = new HashMap<String, String>();
+		Map<String, String> cookieMap = new HashMap<>();
 		try {
 			if(url == null || url.equals("")){
 				return null;
 			}
-				Connection.Response res = Jsoup.connect(url).userAgent(user_agent).data(new HashMap<String, String>())
+				Connection.Response res = Jsoup.connect(url).userAgent(getUserAgent()).data(new HashMap<String, String>())
 						.method(Connection.Method.GET).execute();
 				cookieMap = res.cookies();
 		} catch (Exception e) {
