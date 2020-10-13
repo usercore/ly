@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.junit>4.12</version.junit>
+		<version.junit>4.13.1</version.junit>
 		<version.javaee-api>7.0</version.javaee-api>
 		<version.jstl>1.2</version.jstl>
 		<version.struts2>2.5.2</version.struts2>
