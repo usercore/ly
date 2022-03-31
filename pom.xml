@@ -14,7 +14,7 @@
 		<version.javaee-api>7.0</version.javaee-api>
 		<version.jstl>1.2</version.jstl>
 		<version.struts2>2.5.2</version.struts2>
-		<version.spring>4.3.1.RELEASE</version.spring>
+		<version.spring>5.3.18</version.spring>
 		<version.aspectjweaver>1.8.9</version.aspectjweaver>
 		<version.joda-time>2.9.4</version.joda-time>
 		<version.slf4j-api>1.7.12</version.slf4j-api>
