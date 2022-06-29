@@ -31,7 +31,7 @@
 		<version.qian88-depository-client>1.3.0</version.qian88-depository-client>
 		<version.qian88-message-client>1.0.0</version.qian88-message-client>
 		<version.itextpdf>5.5.10</version.itextpdf>
-		<version.poi>3.16</version.poi>
+		<version.poi>4.1.1</version.poi>
 	</properties>
 
 	<dependencies>
